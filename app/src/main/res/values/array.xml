@@ -1,0 +1,30 @@
+<resources>
+    <!-- Reply Preference -->
+    <string-array name="items_name">
+        <item>English</item>
+        <item>Polish</item>
+        <item>Turkish</item>
+    </string-array>
+
+    <string-array name="items_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+
+
+
+    <string-array name="countries_name">
+        <item>Poland</item>
+        <item>Turkey</item>
+        <item>England</item>
+    </string-array>
+
+    <string-array name="countries_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <!-- Reply Preference -->
+</resources>

@@ -1,0 +1,60 @@
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+        <Preference
+            app:key="account"
+            app:title="Account"
+            app:summary="Edit Profile"
+            app:icon="@drawable/ic_profile_black"
+            app:fragment="AccountFragment"/>
+
+    <Preference
+        app:key="privacy"
+        app:title="Privacy and Security"
+        app:summary="Change privacy settings"
+        app:fragment="PrivacyFragment"
+        app:icon="@drawable/ic_password"/>
+
+
+        <Preference
+        app:title="Notifications"
+        app:summary="On-Off, Sound, Vibration"
+        app:icon="@drawable/ic_notifi"
+        app:fragment="NotificationFragment"/>
+
+
+
+    <Preference
+        app:title="Help and Support"
+        app:summary="How to, FAQ, Contact us"
+        app:icon="@drawable/ic_help"
+        app:fragment="HelpFragment"/>
+
+
+    <Preference
+        app:title="About"
+        app:summary="InDistant, Dev, Donate"
+        app:icon="@drawable/ic_baseline_info_24"
+        app:fragment="InfoFragment"/>
+
+    <ListPreference
+        app:key="language"
+        app:entries="@array/items_name"
+        app:entryValues="@array/items_value"
+        app:defaultValue="true"
+        app:title="Language"
+        app:icon="@drawable/ic_baseline_language_24"
+        app:summary="Change language"/>
+
+
+    <SwitchPreferenceCompat
+        app:key="switchTheme"
+        app:title="Dark Theme"
+        app:summary="Change Theme"
+        app:icon="@drawable/ic_baseline_dark_mode_24"/>
+
+
+
+
+</PreferenceScreen>

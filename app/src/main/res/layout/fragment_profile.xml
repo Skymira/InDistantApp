@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileFragment"
+    android:orientation="vertical"
+    android:background="#F1EDED">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:scaleType="centerCrop"
+                android:id="@+id/coverIv"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:background="@color/textColor">
+
+            </ImageView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="100dp">
+
+                <ImageView
+                    android:scaleType="centerCrop"
+                    android:id="@+id/avatarIv"
+                    android:layout_marginStart="20dp"
+                    android:background="#606983"
+                    android:src="@drawable/ic_default_image_white"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"/>
+
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="220dp"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:textAlignment="textStart"
+                    android:id="@+id/nameTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/abeezee"
+                    android:textColor="@color/textColor"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:textAlignment="textStart"
+                    android:id="@+id/usernameTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/abeezee"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:textAlignment="textStart"
+                    android:id="@+id/genderTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/abeezee"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:textAlignment="textStart"
+                    android:id="@+id/birthdayTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/abeezee"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:textStyle="bold"
+                    android:textAlignment="textStart"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/abeezee"
+                    android:id="@+id/countriesTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/textColor"/>
+
+                <TextView
+                    android:textStyle="bold"
+                    android:textAlignment="textStart"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/abeezee"
+                    android:id="@+id/nationalityTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/textColor"/>
+                <TextView
+                    android:textAlignment="textStart"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/abeezee"
+                    android:id="@+id/distanceTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/textColor"/>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
+
+</RelativeLayout>
