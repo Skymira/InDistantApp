@@ -7,3 +7,6 @@ People in the same situation and from the same countries can exchange informatio
 give each other tips and advices. Help each other with VISA and many other documents.
 Despite that they can casually communicate with each other, spend time, exchange messages, photos, notes, play games and watch videos.
 They can check latest posts and connect with people all over the world.
+Application is connected to the Real Time Database from FIREBASE.
+Application will contain google location sharing, as well as many more features.
+Currently in progress. Wiktoria Demir.
