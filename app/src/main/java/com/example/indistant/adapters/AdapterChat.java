@@ -133,7 +133,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder> {
         final String myUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         String msgTimeStamp = chatList.get(position).getTimestamp();
-        DatabaseReference dbRef = FirebaseDatabase.getInstance("https://mysocialapp-81125-default-rtdb.europe-west1.firebasedatabase.app").getReference("Chats");
+        DatabaseReference dbRef = FirebaseDatabase.getInstance("https://indistant-ec7c4-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Chats");
         Query query = dbRef.orderByChild("timestamp").equalTo(msgTimeStamp);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

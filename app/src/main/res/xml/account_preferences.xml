@@ -28,16 +28,10 @@
         android:key="gender"
         android:title="Gender"
         android:icon="@drawable/ic_gender"/>
-    <DropDownPreference
+    <Preference
         android:key="country"
-        android:entryValues="@array/countries_value"
-        android:entries="@array/countries_name"
         android:title="Country of residence"
         android:icon="@drawable/ic_home_black"/>
-    <Preference
-        android:key="nationality"
-        android:title="Nationality"
-        android:icon="@drawable/ic_partner"/>
 
 
 </PreferenceScreen>

@@ -288,7 +288,6 @@ public class MainActivity extends AppCompatActivity {
                             hashMap.put("name","");
                             hashMap.put("birthday","");
                             hashMap.put("gender","");
-                            hashMap.put("nationality","");
 
                             // Firebase database instance
                             FirebaseDatabase database = FirebaseDatabase.getInstance("https://indistant-ec7c4-default-rtdb.europe-west1.firebasedatabase.app");

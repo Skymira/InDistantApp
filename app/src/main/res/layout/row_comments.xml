@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="1dp"
+    app:contentPadding="2dp"
+    app:cardBackgroundColor="@color/white">
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="50dp"
+            android:id="@+id/avatarIv"
+            android:layout_height="50dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/ic_default_image"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/usernameTv"
+            android:layout_toRightOf="@+id/avatarIv"
+            android:textColor="@color/textColor"
+            android:text="Username"
+            android:textSize="14sp"
+            android:fontFamily="@font/abeezee"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/countryTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/usernameTv"
+            android:layout_toRightOf="@+id/avatarIv"
+            android:fontFamily="@font/abeezee"
+            android:text="Country"
+            android:textColor="@color/textColor"
+            android:textSize="12sp"
+            />
+
+        <TextView
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/commentTv"
+            android:layout_below="@id/countryTv"
+            android:layout_toEndOf="@id/avatarIv"
+            android:text="This is an actual comment"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/abeezee"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timeTv"
+            android:text="12/06/2022"
+            android:layout_below="@+id/commentTv"
+            android:layout_toEndOf="@id/avatarIv"
+            android:textSize="12sp"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/abeezee"/>
+        
+        
+        
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

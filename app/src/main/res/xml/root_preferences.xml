@@ -38,11 +38,8 @@
         app:icon="@drawable/ic_baseline_info_24"
         app:fragment="InfoFragment"/>
 
-    <ListPreference
+    <Preference
         app:key="language"
-        app:entries="@array/items_name"
-        app:entryValues="@array/items_value"
-        app:defaultValue="true"
         app:title="Language"
         app:icon="@drawable/ic_baseline_language_24"
         app:summary="Change language"/>

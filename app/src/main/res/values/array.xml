@@ -16,15 +16,11 @@
 
 
     <string-array name="countries_name">
-        <item>Poland</item>
-        <item>Turkey</item>
-        <item>England</item>
+
     </string-array>
 
     <string-array name="countries_value">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
+
     </string-array>
     <!-- Reply Preference -->
 </resources>

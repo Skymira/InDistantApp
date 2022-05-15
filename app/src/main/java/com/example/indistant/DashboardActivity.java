@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.indistant.notifications.Token;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,6 +24,9 @@ import com.google.firebase.auth.FirebaseUser;
 import android.os.Bundle;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -31,6 +36,8 @@ public class DashboardActivity extends AppCompatActivity {
 
         ActionBar actionBar;
         // Views
+
+        String mUID;
 
 
         @Override
@@ -58,6 +65,23 @@ public class DashboardActivity extends AppCompatActivity {
             }
 
             // Init views
+
+            checkUserStatus();
+
+
+
+        }
+
+    @Override
+    protected void onResume() {
+            checkUserStatus();
+        super.onResume();
+    }
+
+    public void updateToken(String token){
+            DatabaseReference ref = FirebaseDatabase.getInstance("https://indistant-ec7c4-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Tokens");
+            Token mToken = new Token(token);
+            ref.child(mUID).setValue(mToken);
 
         }
 
@@ -108,6 +132,16 @@ public class DashboardActivity extends AppCompatActivity {
             FirebaseUser mUser = mAuth.getCurrentUser();
             if (mUser != null) {
                 // If user is singed in
+                mUID = mUser.getUid();
+
+
+                SharedPreferences sp = getSharedPreferences("SP_USER", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString("Current_USERID", mUID);
+                editor.apply();
+
+                //update token
+                updateToken(FirebaseInstanceId.getInstance().getToken());
 
             } else {
                 // If user is singed out

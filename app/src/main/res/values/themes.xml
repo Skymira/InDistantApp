@@ -3,8 +3,8 @@
     <!-- Base application theme. -->
     <style name="Theme.InDistant" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/appColor</item>
+        <item name="colorPrimaryVariant">#00695C</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -19,7 +19,7 @@
 
     <style name="ThemeNo.InDistant" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">#008577</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimaryVariant">#00695C</item>
         <item name="colorOnPrimary">@color/white</item>
     </style>
     <style name="Theme.InDistant.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
@@ -38,4 +38,7 @@
     <style name="MyDatePicker" parent="@android:style/Widget.Material.DatePicker">
         <item name="android:datePickerMode">spinner</item>
     </style>
+
+
+
 </resources>

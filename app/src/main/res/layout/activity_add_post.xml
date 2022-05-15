@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    tools:context=".AddPostActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+
+
+
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/abeezee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pTitleEt"
+            android:padding="10dp"
+            android:hint="Enter post title"
+            android:singleLine="true"
+            android:background="@drawable/editextstyle"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/ic_upload"
+            android:backgroundTint="@color/appColor"
+            android:id="@+id/pImageIv"/>
+
+        <EditText
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/abeezee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pDescriptionEt"
+            android:padding="10dp"
+            android:hint="Enter what's on your mind :)"
+            android:inputType="textCapSentences|textMultiLine"
+            android:minHeight="120dp"
+            android:gravity="start"
+            android:singleLine="true"
+            android:background="@drawable/editextstyle"/>
+
+        <Button
+            android:id="@+id/pUploadBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            android:text="Publish"
+            android:layout_gravity="end"/>
+
+
+
+
+    </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
+    </RelativeLayout>

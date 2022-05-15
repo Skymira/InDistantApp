@@ -27,6 +27,13 @@ import android.widget.Toast;
 
 import com.example.indistant.adapters.AdapterChat;
 import com.example.indistant.models.ModelChat;
+import com.example.indistant.models.ModelUsers;
+import com.example.indistant.notifications.APIService;
+import com.example.indistant.notifications.Client;
+import com.example.indistant.notifications.Data;
+import com.example.indistant.notifications.Response;
+import com.example.indistant.notifications.Sender;
+import com.example.indistant.notifications.Token;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -43,7 +50,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-    public class ChatActivity extends AppCompatActivity {
+import retrofit2.Call;
+import retrofit2.Callback;
+
+public class ChatActivity extends AppCompatActivity {
 
         // Views from xml
         Toolbar toolbar;
@@ -70,6 +80,9 @@ import java.util.Locale;
         String myUid;
         String hisImage;
 
+        APIService apiService;
+        boolean notify = false;
+
 
 
         @Override
@@ -95,6 +108,9 @@ import java.util.Locale;
 
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(linearLayoutManager);
+
+            //create api service
+            apiService = Client.getRetrofit("https://fcm.googleapis.com/").create(APIService.class);
 
             Intent intent = getIntent();
             hisUid = intent.getStringExtra("hisUid");
@@ -159,8 +175,11 @@ import java.util.Locale;
 
             // Click button to send message
             sendBtn.setOnClickListener(new View.OnClickListener() {
+
+
                 @Override
                 public void onClick(View view) {
+                    notify = true;
                     // get text from edit text
                     String message = messageEt.getText().toString().trim();
                     // Check if text is empty or not
@@ -173,6 +192,8 @@ import java.util.Locale;
                         // text not empty
                         sendMessage(message);
                     }
+
+                    messageEt.setText("");
                 }
             });
 
@@ -268,7 +289,63 @@ import java.util.Locale;
             databaseReference.child("Chats").push().setValue(hashMap);
 
             // Reset edittext after sending message
-            messageEt.setText("");
+           // messageEt.setText("");
+
+
+            String msg = message;
+            DatabaseReference database = FirebaseDatabase.getInstance("https://indistant-ec7c4-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(myUid);
+            database.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    ModelUsers user = snapshot.getValue(ModelUsers.class);
+
+                    if(notify){
+                        sendNotification(hisUid, user.getUsername(), message);
+                    }
+                    notify = false;
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+        private void sendNotification(String hisUid, String username, String message) {
+            DatabaseReference allTokens = FirebaseDatabase.getInstance("https://indistant-ec7c4-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Tokens");
+
+            Query query = allTokens.orderByKey().equalTo(hisUid);
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot ds : snapshot.getChildren()){
+                        Token token = ds.getValue(Token.class);
+                        Data data = new Data(myUid, username+":"+message, "New Message", hisUid, R.drawable.ic_default_image);
+
+
+                        Sender sender = new Sender(data, token.getToken());
+                        apiService.sendNotification(sender)
+                                .enqueue(new Callback<Response>() {
+                                    @Override
+                                    public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                                        Toast.makeText(ChatActivity.this, ""+response.message(), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Response> call, Throwable t) {
+
+                                    }
+                                });
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
         }
 
 
@@ -332,6 +409,7 @@ import java.util.Locale;
             getMenuInflater().inflate(R.menu.menu_main, menu);
             //Hide search view
             menu.findItem(R.id.search).setVisible(false);
+            menu.findItem(R.id.action_add_post).setVisible(false);
 
             return super.onCreateOptionsMenu(menu);
         }

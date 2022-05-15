@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/colorBackground"
-    tools:context=".MainActivity">
+    tools:context=".SignUpFragment">
 
     <LinearLayout
         android:id="@+id/logo"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
@@ -17,7 +17,8 @@
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/icon"/>
+            android:src="@drawable/icon"
+            android:contentDescription="@string/todo"/>
     </LinearLayout>
 
     <LinearLayout
@@ -33,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/abeezee"
-            android:text="In"
+            android:text="@string/in"
             android:textColor="@color/appColor"
             android:textSize="35sp"
             android:textStyle="bold" />
@@ -43,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/appName_2"
-            android:text="Distant"
+            android:text="@string/distant"
             android:textStyle="bold"
             android:textSize="35sp"/>
 
@@ -63,12 +64,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:text="Long Distance Relationship Community"/>
+            android:text="@string/long_distance_relationship_community"/>
 
     </LinearLayout>
     <View
         android:id="@+id/line"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/shortDesc"
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -80,7 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/line"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
         <TextView
@@ -89,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="90dp"
             android:fontFamily="@font/abeezee"
-            android:text="Log in"
+            android:text="@string/log_in"
             android:textColor="@color/textColor"
             android:textSize="25sp" />
 
@@ -98,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp"
-            android:text="or"
+            android:text="@string/or"
             android:textColor="@color/textColor"
             android:textSize="15sp" />
 
@@ -110,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="50dp"
             android:fontFamily="@font/abeezee"
-            android:text="Sign up"
+            android:text="@string/sign_up"
             android:textColor="@color/appColor"
             android:textSize="25sp" />
 
@@ -119,7 +120,9 @@
 
 
     <LinearLayout
-        android:layout_marginTop="-20dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -128,21 +131,18 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginRight="50dp"
-            android:layout_marginLeft="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_centerHorizontal="true"
             android:id="@+id/emailTIL">
 
             <EditText
+                android:autofillHints="Email"
                 android:fontFamily="@font/abeezee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/emailEt"
                 android:inputType="textEmailAddress"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -150,6 +150,9 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -157,12 +160,8 @@
         android:layout_below="@+id/inputs">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginTop="0dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginLeft="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:id="@+id/passwordTIL"
             app:passwordToggleEnabled="true">
 
@@ -171,10 +170,12 @@
                 android:id="@+id/passwordEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
+                android:visibility="visible"
                 android:textColor="@color/textColor"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:autofillHints="Password" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -192,11 +193,7 @@
         android:id="@+id/buttonsLayout">
 
 
-        <LinearLayout
-            android:layout_marginStart="0dp"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
 
             <Button
                 android:fontFamily="@font/abeezee"
@@ -209,14 +206,11 @@
                 android:layout_marginStart="50dp"
                 android:layout_marginEnd="50dp"
                 android:drawableStart="@drawable/ic_login"
-                android:text="Sign up" />
+                android:text="@string/sign_up" />
 
         </LinearLayout>
 
 
-
-
-    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/container2"

@@ -1,6 +1,8 @@
 package com.example.indistant.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.indistant.R;
+import com.example.indistant.ThereProfileActivity;
 import com.example.indistant.models.ModelUsers;
 import com.example.indistant.ChatActivity;
 import com.example.indistant.R;
@@ -63,10 +66,29 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Toast.makeText(context, ""+userCountries, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, ChatActivity.class);
-                intent.putExtra("hisUid",hisUID);
-                context.startActivity(intent);
+
+                //show dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setItems(new String[]{"Profile", "Chat"}, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if(i==0){
+                            // profile clicked
+                            Intent intent = new Intent(context, ThereProfileActivity.class);
+                            intent.putExtra("uid",hisUID);
+                            context.startActivity(intent);
+                        }
+                        if(i == 1){
+                            // Chat clicked
+                            // Toast.makeText(context, ""+userCountries, Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(context, ChatActivity.class);
+                            intent.putExtra("hisUid",hisUID);
+                            context.startActivity(intent);
+
+                        }
+                    }
+                });
+                builder.create().show();
             }
         });
     }

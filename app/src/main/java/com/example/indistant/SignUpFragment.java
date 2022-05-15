@@ -179,7 +179,6 @@ public class SignUpFragment extends Fragment {
                     hashMap.put("name","");
                     hashMap.put("birthday","");
                     hashMap.put("gender","");
-                    hashMap.put("partnersCountry","");
                     hashMap.put("country","");
 
                     // Firebase database instance

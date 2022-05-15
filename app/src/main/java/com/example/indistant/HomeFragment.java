@@ -42,15 +42,15 @@ import com.google.firebase.auth.FirebaseUser;
 
             firebaseAuth = FirebaseAuth.getInstance();
 
-            //forum = view.findViewById(R.id.forum);
+            forum = view.findViewById(R.id.forum);
 
-          //  forum.setOnClickListener(new View.OnClickListener() {
-             //   @Override
-               // public void onClick(View view) {
-                 //   Intent intent = new Intent(getActivity(), ForumActivity.class);
-                 //   startActivity(intent);
-           //     }
-         //   });
+            forum.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getActivity(), ForumActivity.class);
+                    startActivity(intent);
+                }
+            });
 
 
             return view;

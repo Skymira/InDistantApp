@@ -11,4 +11,5 @@
 
     <color name="appColor">#FF018786</color>
     <color name="textColor">#2D313D</color>
+    <color name="backgroundColor">#fcfcfc</color>
 </resources>

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.indistant" >
+    package="com.example.indistant">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="@drawable/icon"
@@ -15,12 +14,22 @@
         android:largeHeap="true"
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
-        android:theme="@style/Theme.InDistant" >
+        android:theme="@style/Theme.InDistant"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ThereProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PostDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddPostActivity"
+            android:exported="false" />
         <activity
             android:name=".SettingsActivity"
-            android:parentActivityName=".DashboardActivity"
             android:exported="false"
-            android:label="@string/title_activity_settings" />
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".DashboardActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />
@@ -33,7 +42,7 @@
             android:theme="@style/ThemeNo.InDistant" />
         <activity
             android:name=".DashboardActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,6 +53,23 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <service
+            android:name=".notifications.FirebaseService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_SERVICE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".notifications.FirebaseMessaging"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

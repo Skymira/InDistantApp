@@ -3,16 +3,16 @@ package com.example.indistant.models;
 public class ModelUsers {
 
     // Use same name as in firebase database
-    String username, email, search, countries, distance, image, cover, uid;
+    String username, email, search, country, distance, image, cover, uid;
 
     public ModelUsers() {
     }
 
-    public ModelUsers(String username, String email, String search, String countries, String distance, String image, String cover, String uid) {
+    public ModelUsers(String username, String email, String search, String country, String distance, String image, String cover, String uid) {
         this.username = username;
         this.email = email;
         this.search = search;
-        this.countries = countries;
+        this.country = country;
         this.distance = distance;
         this.image = image;
         this.cover = cover;
@@ -44,11 +44,11 @@ public class ModelUsers {
     }
 
     public String getCountries() {
-        return countries;
+        return country;
     }
 
     public void setCountries(String countries) {
-        this.countries = countries;
+        this.country = countries;
     }
 
     public String getDistance() {

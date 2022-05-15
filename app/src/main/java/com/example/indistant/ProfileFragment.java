@@ -72,7 +72,9 @@ import java.util.HashMap;
 
         // Views
         ImageView avatarIv, coverIv;
-        TextView usernameTv, countriesTv, nationalityTv, nameTv, birthdayTv, genderTv;
+        TextView usernameTv, countriesTv, nameTv, birthdayTv, genderTv;
+
+        String uid;
 
         public ProfileFragment() {
             // Required empty public constructor
@@ -108,7 +110,6 @@ import java.util.HashMap;
             usernameTv = view.findViewById(R.id.usernameTv);
             nameTv = view.findViewById(R.id.nameTv);
             countriesTv = view.findViewById(R.id.countriesTv);
-            nationalityTv = view.findViewById(R.id.nationalityTv);
             genderTv = view.findViewById(R.id.genderTv);
             birthdayTv = view.findViewById(R.id.birthdayTv);
 
@@ -129,7 +130,6 @@ import java.util.HashMap;
                         String birthday = ""+ds.child("birthday").getValue();
                         String image =""+ds.child("image").getValue();
                         String cover =""+ds.child("cover").getValue();
-                        String nationality = ""+ds.child("nationality").getValue();
 
                         // Set data
                         nameTv.setText(name);
@@ -137,7 +137,6 @@ import java.util.HashMap;
                         countriesTv.setText(myCountry);
                         genderTv.setText(gender);
                         birthdayTv.setText(birthday);
-                        nationalityTv.setText(nationality);
 
                         try {
                             // Load image if it exists
@@ -203,6 +202,7 @@ import java.util.HashMap;
             FirebaseUser mUser = firebaseAuth.getCurrentUser();
             if (mUser != null) {
                 // If user is singed in
+                uid = mUser.getUid();
 
             } else {
                 // If user is singed out
@@ -210,4 +210,5 @@ import java.util.HashMap;
                 getActivity().finish();
             }
         }
+
     }
