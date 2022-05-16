@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:contentPadding="3dp">
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImageIv"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_default_image" />
+
+        <ImageView
+            android:id="@+id/statusIv"
+            android:layout_width="25dp"
+            android:layout_height="25dp"/>
+        <TextView
+            android:layout_marginLeft="4dp"
+            android:id="@+id/usernameTextTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:fontFamily="@font/abeezee"
+            android:textSize="18sp"
+            android:textColor="@color/textColor"
+            android:layout_toEndOf="@+id/profileImageIv"/>
+
+        <TextView
+            android:layout_marginLeft="4dp"
+            android:id="@+id/countryTextTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Country"
+            android:textSize="16sp"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/abeezee"
+            android:layout_below="@+id/usernameTextTv"
+            android:layout_toEndOf="@+id/profileImageIv"/>
+
+        <TextView
+            android:maxLines="2"
+            android:id="@+id/lastMessageTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/countryTextTv"
+            android:layout_marginLeft="4dp"
+            android:layout_toEndOf="@+id/profileImageIv"
+            android:fontFamily="@font/abeezee"
+            android:padding="3dp"
+            android:text="Message content"
+            android:textColor="@color/textColor"
+            android:textSize="14sp" />
+        
+        
+        
+        
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

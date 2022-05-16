@@ -175,7 +175,7 @@ public class PostDetailActivity extends AppCompatActivity {
                     commentList.add(modelComment);
 
                     //set up adapter
-                    adapterComments = new AdapterComments(getApplicationContext(), commentList);
+                    adapterComments = new AdapterComments(getApplicationContext(), commentList, myUid, postId);
                     //set adapter
                     recyclerView.setAdapter(adapterComments);
                 }

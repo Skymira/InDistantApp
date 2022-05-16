@@ -310,6 +310,41 @@ public class ChatActivity extends AppCompatActivity {
 
                 }
             });
+
+            // Chatlist in firebase
+            final DatabaseReference chatRef1 = FirebaseDatabase.getInstance("https://indistant-ec7c4-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Chatlist")
+                    .child(myUid).child(hisUid);
+
+            chatRef1.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(!snapshot.exists()){
+                        chatRef1.child("id").setValue(hisUid);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+            final DatabaseReference chatRef2 = FirebaseDatabase.getInstance("https://indistant-ec7c4-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Chatlist")
+                    .child(hisUid).child(myUid);
+
+            chatRef2.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(!snapshot.exists()){
+                        chatRef2.child("id").setValue(myUid);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         }
 
         private void sendNotification(String hisUid, String username, String message) {
@@ -409,7 +444,7 @@ public class ChatActivity extends AppCompatActivity {
             getMenuInflater().inflate(R.menu.menu_main, menu);
             //Hide search view
             menu.findItem(R.id.search).setVisible(false);
-            menu.findItem(R.id.action_add_post).setVisible(false);
+            //menu.findItem(R.id.action_add_post).setVisible(false);
 
             return super.onCreateOptionsMenu(menu);
         }

@@ -1,6 +1,8 @@
 package com.example.indistant.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.text.Layout;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -8,12 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.indistant.R;
 import com.example.indistant.models.ModelComment;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
@@ -25,9 +33,13 @@ public class AdapterComments extends RecyclerView.Adapter<AdapterComments.MyHold
     Context context;
     List<ModelComment> commentsList;
 
-    public AdapterComments(Context context, List<ModelComment> commentsList) {
+    String myUid, postId;
+
+    public AdapterComments(Context context, List<ModelComment> commentsList, String myUid, String postId) {
         this.context = context;
         this.commentsList = commentsList;
+        this.myUid = myUid;
+        this.postId = postId;
     }
 
     @NonNull
@@ -69,6 +81,56 @@ public class AdapterComments extends RecyclerView.Adapter<AdapterComments.MyHold
         catch (Exception e){
 
         }
+
+        //Comment deletion
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(myUid.equals(uid)){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getRootView().getContext());
+                    builder.setTitle("Delete");
+                    builder.setMessage("Are you sure?");
+                    builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            deleteComment(cid);
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    builder.create().show();
+                }
+                else{
+                    Toast.makeText(context, "You can only delete your own comment!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
+
+    private void deleteComment(String cid) {
+        final DatabaseReference ref = FirebaseDatabase.getInstance("https://indistant-ec7c4-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Posts").child(postId);
+        ref.child("Comments").child(cid).removeValue();
+
+
+        //Comment count update
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String comments = ""+snapshot.child("pComments").getValue();
+                int newCommentVal = Integer.parseInt(comments) - 1;
+                ref.child("pComments").setValue(""+newCommentVal);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override

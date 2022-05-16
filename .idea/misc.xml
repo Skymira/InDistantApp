@@ -6,6 +6,8 @@
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/drawable-night/button.xml" value="0.1285" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/drawable/bg_receiver.xml" value="0.249" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/drawable/button.xml" value="0.2865" />
+        <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/drawable/cir.xml" value="0.1" />
+        <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/drawable/circle_offline.xml" value="0.1" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/drawable/editextstyle.xml" value="0.1" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/layout/activity_add_post.xml" value="0.22" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/layout/activity_chat.xml" value="0.36666666666666664" />
@@ -27,6 +29,7 @@
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/layout/fragment_users.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/layout/row_chat_left.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/layout/row_chat_right.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/layout/row_chatlist.xml" value="0.25" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/layout/row_comments.xml" value="0.5" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/layout/row_posts.xml" value="0.25" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/layout/row_users.xml" value="0.36666666666666664" />

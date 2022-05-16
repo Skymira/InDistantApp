@@ -51,7 +51,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
         String hisUID = userList.get(position).getUid();
         String userImage = userList.get(position).getImage();
         String userName = userList.get(position).getUsername();
-        String userCountries = userList.get(position).getCountries();
+        String userCountries = userList.get(position).getCountry();
 
         // Set data
         holder.mUsernameTv.setText(userName);
