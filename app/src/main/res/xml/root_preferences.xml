@@ -19,6 +19,7 @@
 
         <Preference
         app:title="Notifications"
+            app:key="notifications"
         app:summary="On-Off, Sound, Vibration"
         app:icon="@drawable/ic_notifi"
         app:fragment="NotificationFragment"/>

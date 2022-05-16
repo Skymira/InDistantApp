@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <SwitchPreferenceCompat
+        android:icon="@drawable/ic_chat_black"
+        android:title="Allow Chat Notifications"
+        android:key="chatNotifications"
+        app:summary="On-Off"
+        />
+    <SwitchPreferenceCompat
+        android:icon="@drawable/ic_post"
+        android:title="Allow Post Notifications"
+        app:key="postNotifications"
+        app:summary="On-Off"/>
+
+</PreferenceScreen>

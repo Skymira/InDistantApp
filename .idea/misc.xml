@@ -24,6 +24,7 @@
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/layout/fragment_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/layout/fragment_login_in.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/layout/fragment_notification.xml" value="0.22359982898674646" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/layout/fragment_profile.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/layout/fragment_settings.xml" value="0.2744762719110731" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/layout/fragment_sign_up.xml" value="0.36666666666666664" />
@@ -41,6 +42,7 @@
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/menu/menu_nav.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/menu/menu_outside.xml" value="0.32407407407407407" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/xml/account_preferences.xml" value="0.2994791666666667" />
+        <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/xml/notification_preferences.xml" value="0.22359982898674646" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/xml/paths.xml" value="0.18" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/xml/preferences.xml" value="0.1" />
         <entry key="..\:/Users/wikto/AndroidStudioProjects/InDistant/app/src/main/res/xml/preferences_account.xml" value="0.2994791666666667" />

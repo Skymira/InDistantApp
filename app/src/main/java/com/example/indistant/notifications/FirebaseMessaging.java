@@ -1,26 +1,37 @@
 package com.example.indistant.notifications;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.example.indistant.ChatActivity;
+import com.example.indistant.PostDetailActivity;
+import com.example.indistant.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.util.Random;
+
 public class FirebaseMessaging extends FirebaseMessagingService {
+
+    private static final String ADMIN_CHANNEL_ID = "admin_channel";
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage message) {
@@ -29,18 +40,88 @@ public class FirebaseMessaging extends FirebaseMessagingService {
         SharedPreferences sp = getSharedPreferences("SP_USER", MODE_PRIVATE);
         String savedCurrentUser = sp.getString("Current_USERID", "None");
 
-        String sent = message.getData().get("sent");
-        String user = message.getData().get("user");
-        FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
-        if(fUser != null && sent.equals(fUser.getUid())){
-            if(!savedCurrentUser.equals(user)){
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-                    sendOAndAboveNotification(message);
-                }
-                else {
-                    sendNormalNotification(message);
+
+        String notificationType = message.getData().get("notificationType");
+        if(notificationType.equals("PostNotification")) {
+            //post notification
+            String sender = message.getData().get("sender");
+            String pId = message.getData().get("pId");
+            String pTitle = message.getData().get("pTitle");
+            String pDescription = message.getData().get("pDescription");
+
+            // if user is same that has posted  don't show notification
+            if(!sender.equals(savedCurrentUser)) {
+                showPostNotification(""+pId, ""+pTitle, ""+pDescription);
+            }
+        }
+        else if (notificationType.equals("ChatNotification")){
+            //chat notification
+
+            String sent = message.getData().get("sent");
+            String user = message.getData().get("user");
+            FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
+            if(fUser != null && sent.equals(fUser.getUid())){
+                if(!savedCurrentUser.equals(user)){
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                        sendOAndAboveNotification(message);
+                    }
+                    else {
+                        sendNormalNotification(message);
+                    }
                 }
             }
+        }
+
+
+
+    }
+
+    private void showPostNotification(String pId, String pTitle, String pDescription) {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        int notificationID = new Random().nextInt(3000);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            setupPostNotificationChannel(notificationManager);
+        }
+
+
+        Intent intent = new Intent(this, PostDetailActivity.class);
+        intent.putExtra("postId",pId);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+
+        // LargeIcon
+
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.icon);
+
+        // Sound for notification
+        Uri notificationSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, ""+ADMIN_CHANNEL_ID)
+                .setSmallIcon(R.drawable.icon)
+                .setLargeIcon(largeIcon)
+                .setContentTitle(pTitle)
+                .setContentText(pDescription)
+                .setSound(notificationSoundUri)
+                .setContentIntent(pendingIntent);
+
+        // show notification
+        notificationManager.notify(notificationID, notificationBuilder.build());
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void setupPostNotificationChannel(NotificationManager notificationManager) {
+        CharSequence channelName = "New Notification";
+        String channelDescription = "Device to device post notification";
+
+        NotificationChannel adminChannel = new NotificationChannel(ADMIN_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_HIGH);
+        adminChannel.setDescription(channelDescription);
+        adminChannel.enableLights(true);
+        adminChannel.setLightColor(Color.RED);
+        adminChannel.enableVibration(true);
+        if(notificationManager != null) {
+            notificationManager.createNotificationChannel(adminChannel);
         }
     }
 

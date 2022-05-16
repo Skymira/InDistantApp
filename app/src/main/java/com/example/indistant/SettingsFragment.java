@@ -62,6 +62,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         Preference accountPreference = findPreference("account");
         SwitchPreferenceCompat switchTheme = findPreference("switchTheme");
         Preference language = findPreference("language");
+        Preference notifications = findPreference("notifications");
 
         language.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -108,6 +109,20 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 return true;
             }
         });
+
+        notifications.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(@NonNull Preference preference) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.settings, new NotificationFragment())
+                        .commit();
+
+                return true;
+            }
+        });
+
+
     }
 
     public void ToggleDarkMode() {

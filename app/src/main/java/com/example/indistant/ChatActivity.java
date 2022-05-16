@@ -596,7 +596,11 @@ public class ChatActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for(DataSnapshot ds : snapshot.getChildren()){
                         Token token = ds.getValue(Token.class);
-                        Data data = new Data(myUid, username+":"+message, "New Message", hisUid, R.drawable.ic_default_image);
+                        Data data = new Data(""+myUid,
+                                ""+username+":"+message,
+                                "New Message",
+                                ""+hisUid,
+                                R.drawable.ic_default_image, "ChatNotification");
 
 
                         Sender sender = new Sender(data, token.getToken());
