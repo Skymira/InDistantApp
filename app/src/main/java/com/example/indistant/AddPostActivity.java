@@ -235,6 +235,9 @@ public class AddPostActivity extends AppCompatActivity {
             public void onSuccess(Void unused) {
                 pd.dismiss();
                 Toast.makeText(AddPostActivity.this, "Updated...", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AddPostActivity.this, ForumActivity.class);
+                startActivity(intent);
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -288,6 +291,8 @@ public class AddPostActivity extends AppCompatActivity {
                         public void onSuccess(Void unused) {
                             pd.dismiss();
                             Toast.makeText(AddPostActivity.this, "Updated...", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(AddPostActivity.this, ForumActivity.class);
+                            startActivity(intent);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -356,6 +361,8 @@ public class AddPostActivity extends AppCompatActivity {
                                 public void onSuccess(Void unused) {
                                     pd.dismiss();
                                     Toast.makeText(AddPostActivity.this, "Updated...", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(AddPostActivity.this, ForumActivity.class);
+                                    startActivity(intent);
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -472,6 +479,8 @@ public class AddPostActivity extends AppCompatActivity {
                                 //added
                                 pd.dismiss();
                                 Toast.makeText(AddPostActivity.this, "Post published :)", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(AddPostActivity.this, ForumActivity.class);
+                                startActivity(intent);
                                 //reset views
                                 titleEt.setText("");
                                 descriptionEt.setText("");
