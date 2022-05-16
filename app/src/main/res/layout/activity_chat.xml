@@ -67,6 +67,14 @@
         android:id="@+id/chatLayout"
         android:orientation="horizontal">
 
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/attachBtn"
+            android:background="@null"
+            android:src="@drawable/ic_attach_black"
+            />
+
         <EditText
             android:layout_width="0dp"
             android:inputType="textCapSentences|textMultiLine"
