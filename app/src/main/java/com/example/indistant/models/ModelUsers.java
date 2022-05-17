@@ -4,11 +4,11 @@ public class ModelUsers {
 
     // Use same name as in firebase database
     String username, email, search, country, distance, image, cover, uid, status, typingTo, birthday, gender, name;
-
+    boolean isBlocked = false;
     public ModelUsers() {
     }
 
-    public ModelUsers(String username, String email, String search, String country, String distance, String image, String cover, String uid, String status, String typingTo, String birthday, String gender, String name) {
+    public ModelUsers(String username, String email, String search, String country, String distance, String image, String cover, String uid, String status, String typingTo, String birthday, String gender, String name, boolean isBlocked) {
         this.username = username;
         this.email = email;
         this.search = search;
@@ -22,8 +22,8 @@ public class ModelUsers {
         this.birthday = birthday;
         this.gender = gender;
         this.name = name;
+        this.isBlocked = isBlocked;
     }
-
 
     public String getUsername() {
         return username;
@@ -127,5 +127,13 @@ public class ModelUsers {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isBlocked() {
+        return isBlocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        isBlocked = blocked;
     }
 }
