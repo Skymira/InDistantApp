@@ -16,7 +16,6 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -24,12 +23,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,13 +38,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.indistant.adapters.AdapterChat;
 import com.example.indistant.models.ModelChat;
 import com.example.indistant.models.ModelUsers;
-import com.example.indistant.notifications.APIService;
-import com.example.indistant.notifications.Client;
 import com.example.indistant.notifications.Data;
-import com.example.indistant.notifications.Response;
 import com.example.indistant.notifications.Sender;
 import com.example.indistant.notifications.Token;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -62,7 +64,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -71,9 +77,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -102,8 +107,12 @@ public class ChatActivity extends AppCompatActivity {
         String myUid;
         String hisImage;
 
-        APIService apiService;
-        boolean notify = false;
+
+        //Volley request queue for notification
+        private RequestQueue requestQueue;
+
+
+        private boolean notify = false;
 
 
     private static final  int CAMERA_REQUEST_CODE = 100;
@@ -137,6 +146,8 @@ public class ChatActivity extends AppCompatActivity {
             sendBtn = findViewById(R.id.sendBtn);
             attachBtn = findViewById(R.id.attachBtn);
 
+            requestQueue = Volley.newRequestQueue(getApplicationContext());
+
             //Init arrays of permissions
             cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
             storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -148,8 +159,7 @@ public class ChatActivity extends AppCompatActivity {
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(linearLayoutManager);
 
-            //create api service
-            apiService = Client.getRetrofit("https://fcm.googleapis.com/").create(APIService.class);
+
 
             Intent intent = getIntent();
             hisUid = intent.getStringExtra("hisUid");
@@ -597,25 +607,46 @@ public class ChatActivity extends AppCompatActivity {
                     for(DataSnapshot ds : snapshot.getChildren()){
                         Token token = ds.getValue(Token.class);
                         Data data = new Data(""+myUid,
-                                ""+username+":"+message,
+                                ""+username+": "+message,
                                 "New Message",
                                 ""+hisUid,
                                 R.drawable.ic_default_image, "ChatNotification");
 
 
                         Sender sender = new Sender(data, token.getToken());
-                        apiService.sendNotification(sender)
-                                .enqueue(new Callback<Response>() {
-                                    @Override
-                                    public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
-                                        Toast.makeText(ChatActivity.this, ""+response.message(), Toast.LENGTH_SHORT).show();
-                                    }
+                        //fcm json object request
+                        try {
+                            JSONObject senderJsonObject = new JSONObject(new Gson().toJson(sender));
+                            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest("https://fcm.googleapis.com/fcm/send", senderJsonObject,
+                                    new Response.Listener<JSONObject>() {
+                                        @Override
+                                        public void onResponse(JSONObject response) {
+                                            // response of the request
+                                            Log.d("JSON_RESPONSE", "OnResponse: "+response.toString());
+                                        }
+                                    }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Log.d("JSON_RESPONSE", "OnResponse: "+error.toString());
+                                }
+                            }){
+                                @Nullable
+                                @Override
+                                public Map<String, String> getHeaders() throws AuthFailureError {
+                                    // put params
+                                    Map<String, String> headers = new HashMap<>();
+                                    headers.put("Content-Type", "application/json");
+                                    headers.put("Authorization","key=AAAAptkeAcs:APA91bEUasvFBsnqiXqtbSogSEReMqfdzyQ-sRCH4ax_A7FnqrmmAiLVy1STEGp8N-yo7O7610m8RFSEMva_2DJSVvI6gu-nhAzVcd_bXCFg9Ui_w9-yE20h0yJUkU240QK52EIY8psb");
+                                    return headers;
+                                }
+                            };
+                            //add this request to queue
+                            requestQueue.add(jsonObjectRequest);
 
-                                    @Override
-                                    public void onFailure(Call<Response> call, Throwable t) {
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-                                    }
-                                });
                     }
                 }
 
